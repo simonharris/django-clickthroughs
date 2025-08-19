@@ -10,7 +10,7 @@ version = "0.1"
 authors = [
   { name="Simon Harding", email="github@pointbeing.net" },
 ]
-description = "A Django clickthroughss app"
+description = "A Django clickthroughs app"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
