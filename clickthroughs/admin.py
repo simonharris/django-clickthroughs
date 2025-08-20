@@ -5,4 +5,4 @@ from .models import *
 @admin.register(Clickthrough)
 class ClickthroughAdmin(admin.ModelAdmin):
 
-    list_display = ['ip_address', 'url_to']
+    list_display = ['clicked_at', 'hostname', 'url_to']
