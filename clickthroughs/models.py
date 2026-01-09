@@ -10,4 +10,3 @@ class Clickthrough(models.Model):
     url_to = models.URLField(blank=True, null=True, verbose_name='To')
     hostname = models.CharField(blank=True, null=True, max_length=256)
     path_from = models.TextField(blank=True, null=True, verbose_name='From')
-

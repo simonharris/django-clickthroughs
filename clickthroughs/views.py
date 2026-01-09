@@ -1,6 +1,4 @@
-from django.http import HttpResponsePermanentRedirect
 from django.http import HttpResponseRedirect
-from django.http import HttpResponse
 from django.views import View
 
 from .models import Clickthrough
@@ -21,7 +19,7 @@ class ClickthroughView(View):
         click.session_id = session_id
         click.user_agent = user_agent
         click.url_to = url_to
-        click.hostname =hostname
+        click.hostname = hostname
         click.path_from = path_from
         click.save()
 
