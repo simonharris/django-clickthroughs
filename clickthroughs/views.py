@@ -7,6 +7,7 @@ from .models import Clickthrough
 class ClickthroughView(View):
     def get(self, request):
 
+        # TODO: switch to get() throughout
         ip_address = request.META['REMOTE_ADDR']
         session_id = request.session.session_key
         user_agent = request.META['HTTP_USER_AGENT']

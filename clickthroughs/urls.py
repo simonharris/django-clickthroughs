@@ -7,6 +7,6 @@ app_name = 'clickthroughs'
 
 urlpatterns = [
 
-    path('', views.ClickthroughView.as_view(), name='go'),
+    path('go', views.ClickthroughView.as_view(), name='go'),
 
 ]
