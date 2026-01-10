@@ -1,4 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 
 
 class Platform(models.Model):
@@ -35,6 +37,24 @@ class Campaign(models.Model):
 class CampaignHostname(models.Model):
     campaign = models.ForeignKey(Campaign, related_name='hostnames', on_delete=models.CASCADE)
     hostname = models.CharField(max_length=255)
+
+    def clean(self):
+        """Ensure no overlapping campaigns for the same hostname."""
+
+        super().clean()
+
+        overlapping = CampaignHostname.objects.filter(
+            hostname=self.hostname,
+            campaign__start_date__lte=self.campaign.end_date or timezone.datetime.max,
+            campaign__end_date__gte=self.campaign.start_date or timezone.datetime.min,
+        )
+        if self.pk:
+            overlapping = overlapping.exclude(pk=self.pk)
+
+        if overlapping.exists():
+            raise ValidationError(
+                f"Hostname '{self.hostname}' is already used by another active campaign."
+            )
 
 
 class Clickthrough(models.Model):
