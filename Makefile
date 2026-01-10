@@ -1,9 +1,9 @@
 test:
 	python3 runtests.py
 
-# testc:
-# 	coverage run runtests.py
-# 	coverage report -m
+testc:
+	coverage run --source=clickthroughs runtests.py
+	coverage report -m
 
 # lint:
 # 	@pylint --ignore migrations vanityurls
