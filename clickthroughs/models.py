@@ -38,6 +38,11 @@ class CampaignHostname(models.Model):
     campaign = models.ForeignKey(Campaign, related_name='hostnames', on_delete=models.CASCADE)
     hostname = models.CharField(max_length=255)
 
+
+    def __str__(self):
+        return self.hostname
+
+
     def clean(self):
         """Ensure no overlapping campaigns for the same hostname."""
 
