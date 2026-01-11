@@ -6,14 +6,14 @@ testc:
 	coverage report -m --skip-covered
 
 # lint:
-# 	@pylint --ignore migrations vanityurls
+# 	@pylint --ignore migrations clickthroughs
 
-# clean:
-# 	rm -rf dist
-# 	rm -rf django_vanityurls.egg-info
+clean:
+	rm -rf dist
+	rm -rf django_clickthroughs.egg-info
 
-# build: clean
-# 	python -m build
+build: clean
+	python -m build
 
-# publish: build
-# 	twine upload dist/*
+publish: build
+	twine upload dist/*
