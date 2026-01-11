@@ -6,6 +6,7 @@ parameters such as affiliate tags.
 
 ## Installation notes
 
+ - `pip install django-clickthroughs`
  - add `clickthroughs` to `INSTALLED_APPS`
  - add `urls.py` entry (pick your own URL space)
  - run migrations: `python manage.py migrate clickthroughs`
