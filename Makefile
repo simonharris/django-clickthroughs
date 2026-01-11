@@ -3,7 +3,7 @@ test:
 
 testc:
 	coverage run --source=clickthroughs runtests.py
-	coverage report -m
+	coverage report -m --skip-covered
 
 # lint:
 # 	@pylint --ignore migrations vanityurls
