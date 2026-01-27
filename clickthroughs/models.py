@@ -27,11 +27,21 @@ class Campaign(models.Model):
     slug = models.SlugField(default='', null=False, unique=True)
     platform = models.ForeignKey(Platform, on_delete=models.CASCADE, related_name='campaigns')
     parameters = models.ManyToManyField(Parameter, blank=True, related_name='campaigns')
-    start_date = models.DateField(blank=True, null=True)
-    end_date = models.DateField(blank=True, null=True)
+    start_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
+
 
     def __str__(self):
         return self.name
+
+
+    def clean(self):
+        """Ensure start_date is before end_date."""
+
+        super().clean()
+
+        if self.start_date and self.end_date and self.start_date > self.end_date:
+            raise ValidationError("Start date must be before end date.")
 
 
 class CampaignHostname(models.Model):
