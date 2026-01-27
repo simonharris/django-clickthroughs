@@ -5,8 +5,8 @@ testc:
 	coverage run --source=clickthroughs runtests.py
 	coverage report -m --skip-covered
 
-# lint:
-# 	@pylint --ignore migrations clickthroughs
+lint:
+	@pylint --ignore migrations clickthroughs
 
 clean:
 	rm -rf dist

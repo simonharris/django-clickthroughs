@@ -1,6 +1,12 @@
 from django.contrib import admin
 
-from .models import *
+from .models import (
+    Campaign,
+    CampaignHostname,
+    Clickthrough,
+    Parameter,
+    Platform,
+)
 
 
 ## inlines --------------------------------------------------------------------
@@ -10,6 +16,7 @@ class CampaignHostnameInline(admin.TabularInline):
     model = CampaignHostname
     extra = 1
 
+
 ## filters --------------------------------------------------------------------
 
 
@@ -18,7 +25,7 @@ class HostnameFilter(admin.SimpleListFilter):
     parameter_name = 'hostname'
 
     def lookups(self, request, model_admin):
-        hostnames = set([c.hostname for c in Clickthrough.objects.all()])
+        hostnames = {c.hostname for c in Clickthrough.objects.all()}
         return [(h, h) for h in hostnames if not h.startswith('dev.')]
 
     def queryset(self, request, queryset):

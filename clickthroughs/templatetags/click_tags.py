@@ -1,4 +1,4 @@
-from urllib.parse import urlparse, parse_qsl, urlencode
+from urllib.parse import urlparse, parse_qsl
 
 from django import template
 from django.db.models import Q
