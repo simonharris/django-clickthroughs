@@ -10,6 +10,22 @@ class CampaignHostnameInline(admin.TabularInline):
     model = CampaignHostname
     extra = 1
 
+## filters --------------------------------------------------------------------
+
+
+class HostnameFilter(admin.SimpleListFilter):
+    title = 'hostname'
+    parameter_name = 'hostname'
+
+    def lookups(self, request, model_admin):
+        hostnames = set([c.hostname for c in Clickthrough.objects.all()])
+        return [(h, h) for h in hostnames if not h.startswith('dev.')]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(hostname=self.value())
+        return queryset
+
 
 ## admins ---------------------------------------------------------------------
 
@@ -39,3 +55,6 @@ class ParameterAdmin(admin.ModelAdmin):
 class ClickthroughAdmin(admin.ModelAdmin):
 
     list_display = ['clicked_at', 'hostname', 'url_to']
+    list_filter = (HostnameFilter,)
+    search_fields = ['url_to']
+    show_facets = admin.ShowFacets.ALWAYS
