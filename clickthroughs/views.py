@@ -10,10 +10,10 @@ class ClickthroughView(View):
         # TODO: switch to get() throughout
         ip_address = request.META['REMOTE_ADDR']
         session_id = request.session.session_key
-        user_agent = request.META['HTTP_USER_AGENT']
+        path_from = request.META.get('HTTP_REFERER', '')
         url_to = request.GET.get('to')
         hostname = request.META['HTTP_HOST']
-        path_from = request.META['HTTP_REFERER']
+        user_agent = request.META.get('HTTP_USER_AGENT', '')
 
         click = Clickthrough()
         click.ip_address = ip_address
