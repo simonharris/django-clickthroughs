@@ -1,5 +1,8 @@
+
 from django.test import TestCase
 from django.core.exceptions import ValidationError
+import datetime
+from django.utils import timezone
 
 from clickthroughs.models import (
     Clickthrough,
@@ -14,19 +17,23 @@ class ClickthroughModelTests(TestCase):
     def setUp(self):
         self.platform = Platform.objects.create(name="Test Platform")
 
+        aware_start1 = timezone.make_aware(datetime.datetime(2024, 1, 1, 0, 0, 0))
+        aware_end1 = timezone.make_aware(datetime.datetime(2024, 12, 31, 0, 0, 0))
+        aware_start2 = timezone.make_aware(datetime.datetime(2024, 6, 1, 0, 0, 0))
+        aware_end2 = aware_end1
         self.campaign1 = Campaign.objects.create(
             name="Campaign 1",
             slug="campaign-1",
             platform=self.platform,
-            start_date="2024-01-01",
-            end_date="2024-12-31",
+            start_date=aware_start1,
+            end_date=aware_end1,
         )
         self.campaign2 = Campaign.objects.create(
             name="Campaign 2",
             slug="campaign-2",
             platform=self.platform,
-            start_date="2024-06-01",
-            end_date="2024-12-31",
+            start_date=aware_start2,
+            end_date=aware_end2,
         )
 
         self.ch1 = CampaignHostname.objects.create(

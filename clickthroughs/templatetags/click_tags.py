@@ -21,7 +21,8 @@ def clickthrough(next_url: str) -> str:
     parsed_url = urlparse(next_url)
     hostname = parsed_url.hostname
 
-    now = timezone.now().date()
+    # Use a timezone-aware datetime at midnight to match DateTimeField comparisons
+    now = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
     ch = (
         CampaignHostname.objects.select_related('campaign')
