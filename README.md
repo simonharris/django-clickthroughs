@@ -1,6 +1,7 @@
 # django-clickthroughs
 
 [![PyPI version](https://img.shields.io/pypi/v/django_clickthroughs.svg)](https://pypi.org/project/django_clickthroughs/)
+![Tests](https://github.com/simonharris/django-clickthroughs/actions/workflows/tests.yml/badge.svg)
 
 Logging and reporting for outbound links, with ability to configure in extra
 parameters such as affiliate tags.
